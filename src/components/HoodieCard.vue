@@ -6,8 +6,12 @@ const props = defineProps({
     }
 })
 
+const emit = defineEmits(['onSelectedHoodie'])
+
 
 const allSizes = ref([0,0,0,0])
+
+
 
 const handleSizeBtn = (index)=>{
     // console.log(index)
@@ -32,9 +36,16 @@ const handleAddToCart = ()=> {
     // sa taille 
     const findTaille = allSizes.value.findIndex((size)=>size==1)
 
-    console.log({findTaille})
+    const oneSweatOptions = {
+        taille:findTaille,
+        ref   :props.hoodie.ref
+    }
+
+    console.log(oneSweatOptions)
 
     // récupère la ref du hoodie ? 
+
+    emit('onSelectedHoodie',oneSweatOptions)
     
     // la quantité 
     // emit pour dire à l'app.vue que ce hoodie et ces options ont été ajoutées 
@@ -56,7 +67,7 @@ const handleAddToCart = ()=> {
             <h5   class="mb-2 text-2xl font-bold text-neutral-800">
                 {{hoodie.name}}
                 <span  class="inline-block ml-4 bg-button-background  border-button-text rounded-md border-2 border-primary px-6 py-2  text-sm font-bold uppercase leading-normal text-primary ">
-                    {{hoodie.price}}€
+                    {{hoodie.price}}€ 
                 </span>
             </h5>
 
@@ -64,23 +75,36 @@ const handleAddToCart = ()=> {
                 {{hoodie.description}}
             </p>
             <p class="text-xs text-neutral-600 space-x-1">
-                <button
+                <!-- <button
                     @click="handleSizeBtn(0)"
                     type="button"
                     :class="allSizes[0]?'border-button-text':'border-tertiary-contrast'"
                     class="inline-block rounded border-2  border-opacity-75 px-6 pt-2 pb-2 text-xs font-medium uppercase leading-normal text-info "
                 >
                     S
-            </button>
+                </button> -->
+
+                <button
+                    v-for="(size,idx) in hoodie.availableSize"
+                    :key="size"
+                    @click="handleSizeBtn(idx)"
+                    type="button"
+                    :class="allSizes[idx]?'border-button-text':'border-tertiary-contrast'"
+                    class="inline-block rounded border-2  border-opacity-75 px-6 pt-2 pb-2 text-xs font-medium uppercase leading-normal text-info "
+                >
+                    {{size}}
+                </button>
+
+
             
-            <button 
+            <!-- <button 
                     @click="handleSizeBtn(1)"
                     type="button"
                     :class="allSizes[1]?'border-button-text':'border-tertiary-contrast'"
                     class="inline-block rounded border-2  border-opacity-75 px-6 pt-2 pb-2 text-xs font-medium uppercase leading-normal text-info "
-                    > <!-- exemple quand la taille est séléctionnée vvvv   -->
+                    >
                     M
-            </button>
+            </button> 
             <button
                 @click="handleSizeBtn(2)"
                 type="button"
@@ -96,7 +120,7 @@ const handleAddToCart = ()=> {
                 class="inline-block rounded border-2   border-opacity-75 px-6 pt-2 pb-2 text-xs font-medium uppercase leading-normal"
             >
                 XL
-            </button>
+            </button> -->
             </p>
             <div class="flex flex-row mt-12">
                 <div class="basis-1/4 w-96">

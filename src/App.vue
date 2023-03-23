@@ -8,6 +8,13 @@ import {HOODIES} from './assets/js/hoodies'
 // console.log(HOODIES)
 const localHoodies = ref(HOODIES)
 
+
+const addHoodieToCart = (data)=>{
+  console.warn('LE PARENT A ENTENDU LE CLICK')
+  console.log(data)
+}
+
+
 </script>
 
 <template>
@@ -36,6 +43,7 @@ const localHoodies = ref(HOODIES)
               v-for="hoodie in localHoodies"
               :key ="hoodie.ref"
               :hoodie="hoodie"
+              @on-selected-hoodie="addHoodieToCart"
             />
 
             
