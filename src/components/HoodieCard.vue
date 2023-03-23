@@ -9,8 +9,9 @@ const props = defineProps({
 const emit = defineEmits(['onSelectedHoodie'])
 
 
-const allSizes = ref([0,0,0,0])
+const allSizes = ref([0,1,0,0])
 
+const selectedQty = ref(1)
 
 
 const handleSizeBtn = (index)=>{
@@ -38,17 +39,18 @@ const handleAddToCart = ()=> {
 
     const oneSweatOptions = {
         taille:findTaille,
-        ref   :props.hoodie.ref
+        ref   :props.hoodie.ref,
+        qty   :parseInt(selectedQty.value)
     }
 
     console.log(oneSweatOptions)
 
-    // récupère la ref du hoodie ? 
-
-    emit('onSelectedHoodie',oneSweatOptions)
     
+        
     // la quantité 
     // emit pour dire à l'app.vue que ce hoodie et ces options ont été ajoutées 
+    emit('onSelectedHoodie',oneSweatOptions)
+
 
 }
 
@@ -75,15 +77,6 @@ const handleAddToCart = ()=> {
                 {{hoodie.description}}
             </p>
             <p class="text-xs text-neutral-600 space-x-1">
-                <!-- <button
-                    @click="handleSizeBtn(0)"
-                    type="button"
-                    :class="allSizes[0]?'border-button-text':'border-tertiary-contrast'"
-                    class="inline-block rounded border-2  border-opacity-75 px-6 pt-2 pb-2 text-xs font-medium uppercase leading-normal text-info "
-                >
-                    S
-                </button> -->
-
                 <button
                     v-for="(size,idx) in hoodie.availableSize"
                     :key="size"
@@ -94,38 +87,11 @@ const handleAddToCart = ()=> {
                 >
                     {{size}}
                 </button>
-
-
-            
-            <!-- <button 
-                    @click="handleSizeBtn(1)"
-                    type="button"
-                    :class="allSizes[1]?'border-button-text':'border-tertiary-contrast'"
-                    class="inline-block rounded border-2  border-opacity-75 px-6 pt-2 pb-2 text-xs font-medium uppercase leading-normal text-info "
-                    >
-                    M
-            </button> 
-            <button
-                @click="handleSizeBtn(2)"
-                type="button"
-                :class="allSizes[2]?'border-button-text':'border-tertiary-contrast'"
-                class="inline-block rounded border-2   border-opacity-75 px-6 pt-2 pb-2 text-xs font-medium uppercase leading-normal text-info "
-            >
-                L
-            </button>
-            <button
-                 @click="handleSizeBtn(3)"
-                type="button"
-                :class="allSizes[3]?'border-button-text':'border-tertiary-contrast'"
-                class="inline-block rounded border-2   border-opacity-75 px-6 pt-2 pb-2 text-xs font-medium uppercase leading-normal"
-            >
-                XL
-            </button> -->
             </p>
             <div class="flex flex-row mt-12">
                 <div class="basis-1/4 w-96">
                     QTY
-                    <select >
+                    <select v-model="selectedQty">
                         <option value="0">0</option>
                         <option value="1" selected>1</option>
                         <option value="2">2</option>
