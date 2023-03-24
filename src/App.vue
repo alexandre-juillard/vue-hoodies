@@ -5,9 +5,10 @@ import HoodieCard from './components/HoodieCard.vue'
 
 import {HOODIES} from './assets/js/hoodies'
 
-// console.log(HOODIES)
 const localHoodies = ref(HOODIES)
-const isModalVisible= ref(false)
+
+const isModalVisible= ref(true)
+
 const hoodieCart = ref([])
 
 const tailles = ['S','M','L','XL']
@@ -17,27 +18,31 @@ const addHoodieToCart = (data)=>{
   // on vérifie si le hoodie est déjà dans le panier ou pas 
 
   const hoodieIdx = hoodieCart.value.findIndex((hood)=>hood.ref==data.ref)
+
+  // on attrape le hoodie qui correspond à la ref
+  // pour récupérer tous les attributs 
   const hoodie    = localHoodies.value.find((hood)=>hood.ref==data.ref) 
+  
+  // ici on compose un objet command à la volée
+  // qui nous servira à lister notre panier dans la modal
   const oneCommand = {
         ref:data.ref,
         taille:tailles[data.taille],
         preview: hoodie.picture,
-        commandPrice:hoodie.price*data.qty
+        commandPrice:hoodie.price*data.qty,
+        name:hoodie.name,
+        qty:data.qty,
+        addedDate:new Date()
   }
   
+  // je regarde si le hoodie est déjà dans mon panier ou pas
+  // findIndex renvoi -1 si il ne trouve pas l'élément
 
   if(hoodieIdx>-1){ // sinon je met à jour 
     hoodieCart.value[hoodieIdx] = oneCommand
   }else{ //pas déjà dans le panier, push "simple"
     hoodieCart.value.push(oneCommand)
   }
-
-  // une ligne dans le panier: un modèle de hoodie et une quantité
-  
-
-
-
-
   
 
 }
@@ -84,7 +89,7 @@ const addHoodieToCart = (data)=>{
     </div>
     <div
         class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
-        :class="isModalVisible?'':'hidden'"
+        :class="{ hidden: !isModalVisible}"
     >
     <!-- modal -->
         <div
@@ -100,15 +105,17 @@ const addHoodieToCart = (data)=>{
             <div class="mt-2 px-7 py-3">
                 <p class="text-sm text-gray-500"> 
                     <!-- liste panier -->
-                    <div
-                        class="p-5 border shadow-lg rounded-md bg-white text-left h-20 flex justify-start space-x-8 mb-2"
+                    <div 
+                        v-for="hoodie in hoodieCart"
+                        :key="hoodie.ref"
+                        class="p-5 border shadow-lg rounded-md bg-white text-left h-16 flex justify-start space-x-8 mb-2"
                     >
                         <img
-                            class="rounded-md object-cover h-auto "
-                            src="https://cdn.shopify.com/s/files/1/0550/6996/6414/products/6560_1800x.jpg?v=1645098113"
+                            class="rounded object-cover h-auto "
+                            :src="'./src/assets/img/'+hoodie.preview"
                             alt="" />
-                        <span>Title sweat</span>
-                        <span>PRIX</span>  
+                        <span>{{hoodie.name}} #{{ hoodie.ref }}</span>
+                        <span>{{hoodie.commandPrice}}</span>  
                     </div>
                     
                 </p>
