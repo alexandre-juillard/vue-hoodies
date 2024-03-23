@@ -1,7 +1,23 @@
-# Vue 3 + Vite
+# Tailwind Shop ~ Vue3
+Compositing & Business logic
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
-
-## Recommended IDE Setup
-
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Créer un/des composants
+Déclarer les props avec le bon type
+## Afficher tous les hoodies
+Avec la bonne directive et la bonne *:key*
+## Activer les filtres
+Par marque et par prix, vous pouvez rajouter un filtre si vous le souhaitez
+## Gestion Objets/Tableaux
+Ne pas autoriser l'ajout de tailles indisponibles
+## Création du panier
+Que dois-je stocker lors de l'ajout d'un hoodie dans le panier ?
+(un objet, un tableau?)
+## Afficher / Masquer la modal panier
+En jouant sur la classe "*hidden*" de tailwind
+On ferme la modal en cliquant sur "Confirm command"
+## Afficher le panier de l'utilisateur
+Avec les quantités et les références des hoodies
+## Afficher le prix total du panier
+En fonction des quantités
+## Conserver le panier malgré un F5
+Comment faire persister le panier ?
