@@ -5,9 +5,6 @@ export const HOODIES = [
         brand:'No brand',
         price:65,
         description:'Coupe ajustée, tissu en molleton doux épais, poches sur le devant',
-        availableSize:[
-            'S','M','L','XL'
-        ],
         globalStock:[
             {
                 size:'S',
@@ -34,9 +31,6 @@ export const HOODIES = [
         brand:'No brand',
         price:65,
         description:'Coupe ajustée, tissu en molleton doux épais, poches sur le devant',
-        availableSize:[
-            'S','M','L','XL'
-        ],
         globalStock:[
             {
                 size:'S',
@@ -63,9 +57,7 @@ export const HOODIES = [
         brand:'Nike',
         price:135,
         description:"Nike Forward catapults your classic hoodie into the future. Unlike traditional knit fabrics, Nike Forward combines multiple thin layers of select fibres for an exceptionally lightweight feel that's effortlessly warm and comfortable.",
-        availableSize:[
-            'S','M','L','XL','2XL'
-        ],
+
         globalStock:[
             {
                 size:'S',
@@ -96,9 +88,7 @@ export const HOODIES = [
         brand:'Trendsplant',
         price:90,
         description:"Sweat à capuche en coton biologique COLOR BLOCK",
-        availableSize:[
-            'S','M','L','XL'
-        ],
+
         globalStock:[
             {
                 size:'S',
@@ -125,9 +115,7 @@ export const HOODIES = [
         brand:'Obey',
         price:45,
         description:"MP. 58% COTON, 42% POLYESTER",
-        availableSize:[
-            'S','M','L','XL'
-        ],
+
         globalStock:[
             {
                 size:'S',
@@ -154,9 +142,7 @@ export const HOODIES = [
         brand:'Lacoste',
         price:135,
         description:"Sweat à capuche, 100% coton, 0% croco",
-        availableSize:[
-            'S','M','L','XL'
-        ],
+
         globalStock:[
             {
                 size:'S',
@@ -183,9 +169,6 @@ export const HOODIES = [
         brand:'Dedicated',
         price:89,
         description:"Relaxed-fit sweatshirt hoodie in organic cotton with soft, brushed inside",
-        availableSize:[
-            'S','M','L','XL'
-        ],
         globalStock:[
             {
                 size:'S',
@@ -212,9 +195,7 @@ export const HOODIES = [
         brand:'Dedicated',
         price:105,
         description:"Hoodie made in soft sweatshirt fabric with the highest quality Organic and Fairtrade cotton",
-        availableSize:[
-            'S','M','L','XL'
-        ],
+
         globalStock:[
             {
                 size:'S',
@@ -222,7 +203,7 @@ export const HOODIES = [
             },
             {
                 size:'M',
-                stock:1
+                stock:0
             },
             {
                 size:'L',
@@ -241,9 +222,6 @@ export const HOODIES = [
         brand:'Timberland',
         price:160,
         description:"spring rock print",
-        availableSize:[
-            'S','M','L','XL','2XL'
-        ],
         globalStock:[
             {
                 size:'S',
@@ -251,7 +229,7 @@ export const HOODIES = [
             },
             {
                 size:'M',
-                stock:0
+                stock:2
             },
             {
                 size:'L',
