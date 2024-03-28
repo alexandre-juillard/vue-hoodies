@@ -1,58 +1,44 @@
 <script setup>
 import {ref} from "vue"
+
+const selectedSize = ref("");
+const panierTab = ref([]);
 const props = defineProps({
     hoodie:{
         type:Object
     }
 })
 
-const emit = defineEmits(['onSelectedHoodie'])
 
-
-const allSizes = ref([0,1,0,0])
-
-const selectedQty = ref(1)
-
-
-const handleSizeBtn = (index)=>{
-    // console.log(index)
-    
-    let shouldReset = false
-    if(allSizes.value[index]){
-        shouldReset = true
-    }
-    // je reset tout
-    allSizes.value.forEach((btn,idx)=>{
-        allSizes.value[idx]=0
-    })
-    // je remet à true que celui séléctionné
-    if(!shouldReset){
-        allSizes.value[index] = 1
-    }
-    
-    console.log(allSizes.value)
+const handleSizeBtn = (size)=>{
+    console.log(size);
+    if(selectedSize.value == size){
+        selectedSize.value = "";
+    } else {
+        selectedSize.value = size
+    };
 }
 
-const handleAddToCart = ()=> {
-    // sa taille 
-    const findTaille = allSizes.value.findIndex((size)=>size==1)
+const addToArray = (newObj)=>{
 
-    const oneSweatOptions = {
-        taille:findTaille,
-        ref   :props.hoodie.ref,
-        qty   :parseInt(selectedQty.value)
-    }
-
-    console.log(oneSweatOptions)
-
-    
-        
-    // la quantité 
-    // emit pour dire à l'app.vue que ce hoodie et ces options ont été ajoutées 
-    emit('onSelectedHoodie',oneSweatOptions)
-
-
+    panierTab.value.push(newObj);
+    console.log(panierTab.value);
 }
+
+const addToCart = ()=>{
+    const panierObj = {
+        price:props.hoodie.price,
+        name:props.hoodie.name,
+        size: selectedSize.value,
+        picture: props.hoodie.picture
+    };
+    console.log(panierObj);
+    addToArray(panierObj);
+    
+}
+
+
+
 
 
 </script>
@@ -77,21 +63,21 @@ const handleAddToCart = ()=> {
                 </p>
                 <p class="text-xs text-neutral-600 space-x-1">
                     <button
-                        v-for="(size,idx) in hoodie.availableSize"
-                        :key="size"
-                        @click="handleSizeBtn(idx)"
+                        v-for="(totalStock) in hoodie.globalStock"
+                        :key="totalStock.size"
+                        :disabled="totalStock.stock==0"
+                        @click="handleSizeBtn(totalStock.size)"
                         type="button"
-                        :class="allSizes[idx]?'border-button-text':'border-tertiary-contrast'"
-                        class="inline-block rounded border-2  border-opacity-75 px-6 pt-2 pb-2 text-xs font-medium uppercase leading-normal text-info "
+                        :class="[selectedSize==totalStock.size? 'border-button-text' : 'border-tertiary-contrast','disabled:opacity-50 inline-block rounded border-2  border-opacity-75 px-6 pt-2 pb-2 text-xs font-medium uppercase leading-normal text-info']"
                     >
-                        {{size}}
+                        {{totalStock.size}}
                     </button>
                 </p>
                 <div class="flex flex-row mt-8">
                     <div class="basis-1/4">
                         <button
                             type="button"
-                            @click="handleAddToCart"
+                            @click="addToCart"
                             class="inline-block rounded border-2 bg-tertiary-contrast text-card-background-light border-button-text px-6 pt-2 pb-2 text-xs font-medium uppercase leading-normal text-info w-44"
                         >
                             ADD TO CART 
