@@ -2,12 +2,13 @@
 import {ref} from "vue"
 
 const selectedSize = ref("");
-const panierTab = ref([]);
 const props = defineProps({
     hoodie:{
         type:Object
     }
 })
+
+const emit = defineEmits(['onAddHoodie'])
 
 
 const handleSizeBtn = (size)=>{
@@ -19,21 +20,17 @@ const handleSizeBtn = (size)=>{
     };
 }
 
-const addToArray = (newObj)=>{
-
-    panierTab.value.push(newObj);
-    console.log(panierTab.value);
-}
-
 const addToCart = ()=>{
+    
     const panierObj = {
+        ref: props.hoodie.ref,
         price:props.hoodie.price,
         name:props.hoodie.name,
         size: selectedSize.value,
         picture: props.hoodie.picture
     };
     console.log(panierObj);
-    addToArray(panierObj);
+    emit('onAddHoodie', panierObj);
     
 }
 
